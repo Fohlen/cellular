@@ -4,7 +4,7 @@ from Color import Color
 
 class Room:
     """ The room class describes the space and raster where cells belong to. R square is used"""
-    def __init__(self, border = 100):
+    def __init__(self, border = 25):
         self._space = {} # The room is an assigment of coordinate: cell
         self.border = border # The room's border. Can be changed
         self._lastCoordinate = Coordinate(1, 1)

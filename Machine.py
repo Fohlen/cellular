@@ -32,15 +32,31 @@ class Machine:
     def __str__(self):
         """Returns a string representation of a machine"""
         # TODO: This is a bit performance-consuming
-        bord = self._room.border
+        border = self._room.border
         str = ''
-        while (bord % 2) > 0 or bord > self._room.border: # Find the next matching number for 2 sane rasters
-            bord = bord - 1
+        while (border % 2) > 0 or border > self._room.border: # Find the next matching number for 2 sane rasters
+            border = border - 1
 
-        half_bord = int(bord / 2)
+        columns = range(int(border / 2))
+        first_colum = min(columns)
 
-        for x in range(half_bord):
-            for y in range(half_bord):
-                pass
-                # Implement
-        return str
+        def getSign(coordinate):
+            if self._room.exists(coordinate):
+                if self._room.getCellColor == Color.black:
+                    return 'B'
+                else:
+                    return 'W'
+            else:
+                return 'N'
+
+        for x in columns:
+            if x is not first_colum:
+                str = str + '\n' # Start a new line
+            for y in columns:
+                coordinate = Coordinate(x, y)
+                if y is first_colum:
+                    str = str + getSign(coordinate) + ' '
+                else:
+                    str = str + getSign(coordinate) + ' '
+
+        return str.format()
