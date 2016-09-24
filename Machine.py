@@ -18,24 +18,29 @@ class Machine:
     def cycle(self):
         """Cycles through the Automat according to Conways rules"""
         # Implements the rules of Conways Game of Life
-        for coordinate in self._room._space.keys():
-            neighbours = self._room.neighbours(coordinate)
+        past_room = self._room # Calculate all operations on the expired room
+
+        for coordinate in past_room._space.keys():
+            neighbours = past_room.neighbours(coordinate)
             if len(neighbours) > 2 or len(neighbours) > 3:
                 self._room.killCell(coordinate)
             elif len(neighbours) == 2 or len(neighbours) == 3:
                 pass
-            elif len(neighbours) == 3 and this._room.getCellColor(coordinate) == Color.black: # if dead
+            elif len(neighbours) == 3 and past_room.getCellColor(coordinate) == Color.black: # if dead
                 self._room.spawnCell(coordinate)
 
     def __str__(self):
         """Returns a string representation of a machine"""
         # TODO: This is a bit performance-consuming
-        bord = this._room.border
+        bord = self._room.border
         str = ''
-        while (bord % 2) > 0 or bord > this._room.border: # Find the next matching number for 2 sane rasters
+        while (bord % 2) > 0 or bord > self._room.border: # Find the next matching number for 2 sane rasters
             bord = bord - 1
 
-        for x in range(bord / 2):
-            for y in range(bord / 2):
+        half_bord = int(bord / 2)
+
+        for x in range(half_bord):
+            for y in range(half_bord):
+                pass
                 # Implement
         return str
